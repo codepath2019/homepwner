@@ -30,9 +30,9 @@ class ItemsViewController: UITableViewController {
     // gives title header for each section
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Team: Mad expensive"
-        } else {
             return "Team: Cheapsies"
+        } else {
+            return "Team: Ya Mad !?"
         }
     }
     
@@ -50,10 +50,16 @@ class ItemsViewController: UITableViewController {
         // Set the text on the cell with the description of the item
         // that is at the nth index of items, where n = row this cell
         // will appear in on the tableView
-        let item = itemStore.allItems[indexPath.row]
+        //let item = itemStore.allItems[indexPath.row]
+        var itemAtIndexPath: Item
+        if indexPath.section == 0 {
+            itemAtIndexPath = itemStore.getItemsLessThan50()[indexPath.row]
+        } else {
+            itemAtIndexPath = itemStore.getItemsGreaterThan50()[indexPath.row]
+        }
         
-        cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text = "$\(item.valueInDollars)"
+        cell.textLabel?.text = itemAtIndexPath.name
+        cell.detailTextLabel?.text = "$\(itemAtIndexPath.valueInDollars)"
         
         return cell
     }
