@@ -12,7 +12,7 @@ class ItemStore {
     var allItems = [Item]()
     
     init() {
-        for _ in 0..<5 {
+        for _ in 0..<8 {
             createItem()
         }
     }
@@ -24,5 +24,33 @@ class ItemStore {
         allItems.append(newItem)
         
         return newItem
+    }
+    
+    // Returns a list of items with prices less than 50
+    func getItemsLessThan50() -> [Item] {
+        var lessThan50: [Item] = []
+
+        var matchedItem: Item
+        for i in 0...allItems.count - 1 {
+            if (allItems[i].valueInDollars < 50) {
+                matchedItem = allItems[i]
+                lessThan50.append(matchedItem)
+            }
+        }
+        return lessThan50
+    }
+    
+    // Returns a list of items with prices greater than 50
+    func getItemsGreaterThan50() -> [Item] {
+        var greaterThan50: [Item] = []
+        
+        var matchedItem: Item
+        for i in 0...allItems.count - 1 {
+            if (allItems[i].valueInDollars > 50) {
+                matchedItem = allItems[i]
+                greaterThan50.append(matchedItem)
+            }
+        }
+        return greaterThan50
     }
 }

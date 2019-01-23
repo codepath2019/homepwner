@@ -12,12 +12,34 @@ class ItemsViewController: UITableViewController {
     
     var itemStore: ItemStore!
     
-    // returns an integer value for the number of rows that the UITableView should display
+    // returns an integer value for the number of rows that the UITableView should display for each section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemStore.allItems.count
+        if section == 0 {
+            return itemStore.getItemsLessThan50().count
+        } else {
+            return itemStore.getItemsGreaterThan50().count
+        }
+//        return itemStore.allItems.count
+    }
+    
+    // returns number of sections for TableView
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    // gives title header for each section
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Team: Mad expensive"
+        } else {
+            return "Team: Cheapsies"
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        print("index section: \(indexPath.section)")
+        print("index row: \(indexPath.row)")
+        
         //Create an instance of UITableViewCell, with default appearance
         //let cell = UITableViewCell(style: .value1, reuseIdentifier: "UITableViewCell")
         
